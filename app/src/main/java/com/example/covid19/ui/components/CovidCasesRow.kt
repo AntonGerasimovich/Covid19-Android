@@ -61,7 +61,7 @@ fun CovidCasesRow(
                     .align(CenterHorizontally)
             ) {
                 val infected = covidCases.infected
-                val cured = covidCases.cured
+                val cured = covidCases.recovered
                 val dead = covidCases.dead
                 CovidNumber(
                     modifier = Modifier
@@ -104,7 +104,7 @@ fun CovidCasesRow(
                     style = Typography.body1,
                     color = Grey,
                     textAlign = TextAlign.Center,
-                    text = stringResource(id = R.string.cured)
+                    text = stringResource(id = R.string.recovered)
                 )
             }
         }
@@ -155,7 +155,7 @@ fun CustomCircle(
 @Preview
 @Composable
 fun ShowCovidCases() {
-    CovidCasesRow(covidCases = CovidCases(356534, 421, 545545454))
+    //CovidCasesRow(covidCases = CovidCases(356534, 421, 545545454))
 }
 
 private fun adjustNumber(number: Int): String = when (number) {

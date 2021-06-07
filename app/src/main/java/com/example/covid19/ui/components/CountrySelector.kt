@@ -19,12 +19,12 @@ import com.example.covid19.ui.theme.*
 @Composable
 fun CountrySelector(
     modifier: Modifier = Modifier,
-    defaultCountry: Country,
+    defaultSelectedCountry: Country,
     countries: List<Country>,
     onCountrySelected: (Country) -> Unit = {}
 ) {
     var expanded: Boolean by remember { mutableStateOf(false) }
-    var selectedCountry: Country by remember { mutableStateOf(defaultCountry) }
+    var selectedCountry: Country by remember { mutableStateOf(defaultSelectedCountry) }
     Card(
         shape = RoundedCornerShape(50),
         modifier = modifier
@@ -102,9 +102,8 @@ fun CountrySelector(
 @Preview
 @Composable
 fun PreviewCountrySelector() {
-    CountrySelector(
-        modifier = Modifier.padding(16.dp),
-        Country("Belarus"),
-        listOf(Country("Belarus"), Country("Russia"))
-    )
+    //CountrySelector(
+    //    modifier = Modifier.padding(16.dp),
+    //    listOf(Country("Belarus"), Country("Russia"))
+    //)
 }

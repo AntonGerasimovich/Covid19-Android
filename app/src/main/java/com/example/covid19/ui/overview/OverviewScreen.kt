@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -17,26 +18,36 @@ import com.example.covid19.ui.components.CountrySelector
 import com.example.covid19.ui.components.CovidCasesRow
 import com.example.covid19.ui.components.SpreadOfVirusMap
 import com.example.covid19.ui.symptoms.HeaderAndBody
-import com.example.covid19.ui.theme.*
+import com.example.covid19.ui.theme.Black
+import com.example.covid19.ui.theme.Blue
+import com.example.covid19.ui.theme.Grey
+import com.example.covid19.ui.theme.Typography
+import com.example.covid19.utils.convertToNormalDate
 import com.google.android.gms.maps.model.LatLng
 
 @Composable
 fun OverviewScreen(
+    overviewViewModel: OverviewViewModel,
     onMenuClick: () -> Unit,
     onCaseUpdateDetailsClick: () -> Unit = {},
     onSpreadOfVirusDetailsClick: () -> Unit = {}
 ) {
+    val covidCases = overviewViewModel.covidCases.collectAsState()
+    val countries = overviewViewModel.countries.collectAsState()
+    val selectedCountry = overviewViewModel.selectedCountry.collectAsState()
     HeaderAndBody(
         onMenuClick = onMenuClick,
         backgroundImageRes = R.drawable.drcorona,
         titleRes = R.string.all_you_need_is_stay_home
     ) {
         OverviewBody(
-            "March 28",
+            selectedCountry = selectedCountry.value,
+            countries = countries.value,
+            covidCases = covidCases.value,
             onCaseUpdateDetailsClick = {
                 onCaseUpdateDetailsClick()
             }, onCountrySelected = {
-                // TODO make a request
+                overviewViewModel.getCovidCases(it)
             }, onSpreadOfVirusDetailsClick = {
                 onSpreadOfVirusDetailsClick()
             }
@@ -46,26 +57,38 @@ fun OverviewScreen(
 
 @Composable
 fun OverviewBody(
-    date: String,
+    selectedCountry: Country,
+    countries: List<Country>,
+    covidCases: CovidCases,
     onCaseUpdateDetailsClick: () -> Unit,
     onCountrySelected: (Country) -> Unit,
     onSpreadOfVirusDetailsClick: () -> Unit
 ) {
     CountrySelector(
         modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 32.dp),
-        defaultCountry = Country("Belarus"),
-        countries = listOf(Country("Belarus"), Country("Russia")),
+        defaultSelectedCountry = selectedCountry,
+        countries = countries,
         onCountrySelected = onCountrySelected
     )
-    CaseUpdateSection(modifier = Modifier.padding(bottom = 16.dp), covidCases = CovidCases(5327, 3467, 432), date = date, onSeeDetailsClick = onCaseUpdateDetailsClick)
+    CaseUpdateSection(
+        modifier = Modifier.padding(bottom = 16.dp),
+        covidCases = covidCases,
+        date = convertToNormalDate(covidCases.date),
+        onSeeDetailsClick = onCaseUpdateDetailsClick
+    )
     SpreadOfVirusSection(onSpreadOfVirusDetailsClick = onSpreadOfVirusDetailsClick)
 }
 
 @Composable
-private fun SpreadOfVirusSection(modifier: Modifier = Modifier, onSpreadOfVirusDetailsClick: () -> Unit) {
-    Column(modifier = modifier
-        .fillMaxWidth()
-        .wrapContentHeight()) {
+private fun SpreadOfVirusSection(
+    modifier: Modifier = Modifier,
+    onSpreadOfVirusDetailsClick: () -> Unit
+) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+    ) {
         Box(
             modifier = Modifier
                 .padding(start = 16.dp, end = 16.dp)
@@ -99,7 +122,12 @@ private fun SpreadOfVirusSection(modifier: Modifier = Modifier, onSpreadOfVirusD
 }
 
 @Composable
-private fun CaseUpdateSection(modifier: Modifier = Modifier, covidCases: CovidCases, date: String, onSeeDetailsClick: () -> Unit) {
+private fun CaseUpdateSection(
+    modifier: Modifier = Modifier,
+    covidCases: CovidCases,
+    date: String,
+    onSeeDetailsClick: () -> Unit
+) {
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -153,5 +181,5 @@ fun CaseUpdateTitle(date: String, onSeeDetailsClick: () -> Unit) {
 @Preview
 @Composable
 fun PreviewOverview() {
-    OverviewScreen({})
+    //OverviewScreen({})
 }

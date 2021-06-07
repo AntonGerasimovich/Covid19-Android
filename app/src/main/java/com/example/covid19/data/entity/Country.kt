@@ -1,5 +1,10 @@
 package com.example.covid19.data.entity
 
+import com.google.gson.annotations.SerializedName
+
 data class Country(
-    var name: String = ""
+    @SerializedName("Country")
+    val name: String,
+    @SerializedName("Slug")
+    val shortName: String = ""
 )
