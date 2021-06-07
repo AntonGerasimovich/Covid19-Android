@@ -1,31 +1,86 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = "1.5.10"
-    ext.koin_version= "2.2.2"
+    ext {
+        // Sdk and tools
+        compileSdkVersion = 30
+        minSdkVersion = 21
+        targetSdkVersion = 30
+        ktlint = "0.40.0"
+
+        // App dependencies
+        appCompatVersion = '1.2.0-rc01'
+        activityComposeVersion = '1.3.0-alpha08'
+        composeVersion = '1.0.0-beta08'
+        coreTestingVersion = '2.1.0'
+        coroutinesVersion = "1.4.2"
+        espressoVersion = '3.3.0'
+        fragmentVersion = '1.3.3'
+        gradleVersion = '7.0.0-alpha11'
+        junitVersion = '4.13.1'
+        ktlintVersion = '0.37.2'
+        ktxVersion = '1.6.0-alpha02'
+        lifecycleVersion = '2.3.0'
+        materialVersion = '1.3.0'
+        roomVersion = '2.2.6'
+        runnerVersion = '1.0.1'
+        truthVersion = '1.0.1'
+        testExtJunit = '1.1.2-rc02'
+        uiAutomatorVersion = '2.2.0'
+        viewPagerVersion = '1.0.0'
+        workVersion = '2.5.0'
+        koin_version= "2.2.2"
+        kotlin_version = '1.5.10'
+        viewModelVersion = '1.0.0-alpha06'
+        composeCostraintVersion = '1.0.0-alpha07'
+    }
     repositories {
         google()
         jcenter()
-        mavenCentral()
     }
+
     dependencies {
-        classpath "com.android.tools.build:gradle:4.2.1"
+        classpath 'com.android.tools.build:gradle:7.1.0-alpha01'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.koin:koin-gradle-plugin:$koin_version"
-        def nav_version = "2.3.0"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
-allprojects {
+plugins {
+    id 'com.diffplug.spotless' version '5.10.0'
+}
+
+subprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
-    }
-}
+        jcenter()
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+    }
+
+    apply plugin: 'com.diffplug.spotless'
+    spotless {
+        kotlin {
+            target '**/*.kt'
+            targetExclude("$buildDir/**/*.kt")
+            targetExclude('bin/**/*.kt')
+
+            ktlint(rootProject.ktlint)
+            licenseHeaderFile rootProject.file('spotless/copyright.kt')
+        }
+    }
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+        kotlinOptions {
+            // Treat all Kotlin warnings as errors
+            allWarningsAsErrors = true
+
+            freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
+
+            // Enable experimental coroutines APIs, including Flow
+            freeCompilerArgs += '-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi'
+            freeCompilerArgs += '-Xopt-in=kotlinx.coroutines.FlowPreview'
+            freeCompilerArgs += '-Xopt-in=kotlin.Experimental'
+            // Set JVM target to 1.8
+            jvmTarget = "1.8"
+        }
+    }
 }

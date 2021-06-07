@@ -1,25 +1,43 @@
 package com.example.covid19.ui
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import com.example.covid19.R
-import com.example.covid19.databinding.ActivityMainBinding
+import androidx.compose.runtime.Composable
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.covid19.ui.overview.OverviewScreen
+import com.example.covid19.ui.symptoms.SymptomsScreen
+import com.example.covid19.ui.theme.CovidTheme
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initView()
+        setContent {
+            CovidApp()
+        }
     }
+}
 
-    private fun initView() {
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setSupportActionBar(findViewById(R.id.toolbar))
-        navController = findNavController(R.id.nav_host_fragment)
+@Composable
+fun CovidApp() {
+    CovidTheme {
+        val navController = rememberNavController()
+        NavHost(
+            navController = navController,
+            startDestination = CovidScreen.Overview.name
+        ) {
+            composable(CovidScreen.Overview.name) {
+                OverviewScreen(onMenuClick = {
+                    navController.navigate(CovidScreen.Symptoms.name)
+                })
+            }
+            composable(CovidScreen.Symptoms.name) {
+                SymptomsScreen(onMenuClick = {
+                    navController.navigate(CovidScreen.Overview.name)
+                })
+            }
+        }
     }
 }
