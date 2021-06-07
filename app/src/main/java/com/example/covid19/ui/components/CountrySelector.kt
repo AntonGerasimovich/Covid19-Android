@@ -26,12 +26,13 @@ fun CountrySelector(
     var expanded: Boolean by remember { mutableStateOf(false) }
     var selectedCountry: Country by remember { mutableStateOf(defaultCountry) }
     Card(
-        shape = RoundedCornerShape(20),
+        shape = RoundedCornerShape(50),
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .clickable(onClick = { expanded = true }),
         backgroundColor = White,
+        elevation = 0.dp,
         border = BorderStroke(0.5.dp, Grey)
     ) {
         Row(
@@ -101,5 +102,9 @@ fun CountrySelector(
 @Preview
 @Composable
 fun PreviewCountrySelector() {
-    CountrySelector(modifier = Modifier.padding(16.dp), Country("Belarus"), listOf(Country("Belarus"), Country("Russia")))
+    CountrySelector(
+        modifier = Modifier.padding(16.dp),
+        Country("Belarus"),
+        listOf(Country("Belarus"), Country("Russia"))
+    )
 }

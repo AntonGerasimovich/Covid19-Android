@@ -6,7 +6,7 @@
     <string name="cured">Cured</string>
     <string name="all_you_need_is_stay_home">All you need\nis stay at home</string>
     <string name="get_to_know_about_covid19">Get to know\nAbout Covid-19</string>
-    <string name="see_details">See Details</string>
+    <string name="see_details">See details</string>
     <string name="newest_update">Newest update </string>
     <string name="case_update">Case Update</string>
     <string name="spread_of_virus">Spread of Virus</string>
@@ -18,6 +18,6 @@
     <string name="symptoms">Symptoms</string>
     <string name="wash_hands">Wash your hands</string>
     <string name="wear_mask">Wear face mask</string>
-    <string name="wash_hands_description">Since the start of coronavirus\noutbreak some places have fully\nembraced wearing face masks</string>
-    <string name="wear_mask_description">Since the start of coronavirus\noutbreak some places have fully\nembraced wearing face masks</string>
+    <string name="wash_hands_description">Since the start of coronavirus\noutbreak some places have fully\nembraced wearing face masks.</string>
+    <string name="wear_mask_description">These diseases include gastrointestinal\ninfections, such as Salmonella, and respiratory\ninfections, such as influenza.</string>
 </resources>

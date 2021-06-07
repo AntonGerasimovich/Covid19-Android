@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.Color
 
 val Green = Color(0xFF15bd0f)
 val Black = Color(0xFF000000)
-val MilkWhite = Color(242, 242, 242)
+val MilkWhite = Color(0xFFECF0F1)
 val White = Color(0xFFFFFFFF)
 val Red = Color(0xFFff2200)
 val Orange = Color(0xFFff9100)
