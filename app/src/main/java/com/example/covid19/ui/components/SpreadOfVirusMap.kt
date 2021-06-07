@@ -33,8 +33,8 @@ fun SpreadOfVirusMap(modifier: Modifier = Modifier, latLng: LatLng) {
             .padding(16.dp)
             .height(300.dp)
             .fillMaxWidth(),
-        shape = RoundedCornerShape(5),
-        elevation = 2.dp
+        shape = RoundedCornerShape(10),
+        elevation = 0.5.dp
     ) {
         MapContent(
             modifier = modifier.fillMaxSize(),

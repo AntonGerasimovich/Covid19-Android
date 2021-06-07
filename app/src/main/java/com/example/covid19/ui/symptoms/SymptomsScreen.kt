@@ -124,7 +124,7 @@ fun SymptomsBody() {
 fun PreventionSection(modifier: Modifier = Modifier) {
     Column(modifier = Modifier.padding(bottom = 16.dp)) {
         Text(
-            modifier = modifier.padding(top = 16.dp),
+            modifier = modifier.padding(top = 32.dp),
             text = stringResource(id = R.string.prevention),
             style = Typography.h6,
             color = Black
@@ -160,14 +160,16 @@ fun PreventionCard(
             modifier = Modifier
                 .height(134.dp)
                 .align(BottomCenter)
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            elevation = 0.dp
         ) {
             Box(modifier = Modifier.matchParentSize()) {
                 Column(modifier = Modifier.padding(start = 135.dp, top = 16.dp)) {
                     Text(
                         text = stringResource(id = title),
                         style = Typography.h6,
-                        color = Black
+                        color = Black,
+                        fontSize = 14.sp
                     )
                     Text(
                         text = stringResource(id = description),
@@ -207,23 +209,20 @@ fun SymptomsSection(modifier: Modifier = Modifier) {
         Row(
             modifier = modifier
                 .wrapContentHeight()
+                .horizontalScroll(rememberScrollState())
         ) {
             SymptomCard(
-                modifier = Modifier
-                    .padding(start = 16.dp)
-                    .weight(1f),
+                modifier = Modifier.padding(start = 16.dp),
                 symptomRes = R.string.headache,
                 symptomIconRes = R.drawable.headache
             )
             SymptomCard(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier.padding(start = 16.dp),
                 symptomRes = R.string.cough,
                 symptomIconRes = R.drawable.caugh
             )
             SymptomCard(
-                modifier = Modifier
-                    .padding(end = 16.dp)
-                    .weight(1f),
+                modifier = Modifier.padding(start = 16.dp),
                 symptomRes = R.string.fever,
                 symptomIconRes = R.drawable.fever
             )
@@ -237,8 +236,10 @@ fun SymptomCard(
     @StringRes symptomRes: Int,
     @DrawableRes symptomIconRes: Int
 ) {
-    CardRounded10(modifier = modifier.wrapContentSize()) {
-        Column(modifier = Modifier.padding(8.dp)) {
+    CardRounded10(modifier = modifier.wrapContentSize(), elevation = 0.5.dp) {
+        Column(modifier = Modifier
+            .padding(8.dp)
+            .padding(start = 8.dp, end = 8.dp)) {
             Box {
                 Image(
                     modifier = Modifier

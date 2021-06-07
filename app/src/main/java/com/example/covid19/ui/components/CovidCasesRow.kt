@@ -1,6 +1,5 @@
 package com.example.covid19.ui.components
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
@@ -11,8 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,7 +22,8 @@ import com.example.covid19.ui.theme.*
 fun CovidCasesRow(
     covidCases: CovidCases
 ) {
-    CardRounded10(
+    CardRounded20(
+        elevation = 0.5.dp,
         modifier = Modifier.padding(16.dp)
     ) {
         Column {
@@ -142,12 +140,12 @@ fun CustomCircle(
             drawCircle(color = circleColor)
         })
         Canvas(modifier = Modifier
-            .size(16.dp)
+            .size(12.dp)
             .align(Center), onDraw = {
             drawCircle(color = ringColor)
         })
         Canvas(modifier = Modifier
-            .size(12.dp)
+            .size(8.dp)
             .align(Center), onDraw = {
             drawCircle(color = circleColor)
         })
