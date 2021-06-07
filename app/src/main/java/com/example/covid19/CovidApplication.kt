@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import com.example.covid19.di.appModule
 import com.example.covid19.di.viewModelModule
+import com.example.covid19.utils.CountryManager
+import kotlinx.coroutines.GlobalScope
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -28,6 +30,6 @@ class CovidApplication: Application() {
     }
 
     private fun init() {
-
+        CountryManager.loadAllCountries(GlobalScope)
     }
 }
