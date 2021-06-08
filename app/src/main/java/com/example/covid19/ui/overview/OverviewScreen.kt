@@ -76,12 +76,13 @@ fun OverviewBody(
         date = convertToNormalDate(covidCases.date),
         onSeeDetailsClick = onCaseUpdateDetailsClick
     )
-    SpreadOfVirusSection(onSpreadOfVirusDetailsClick = onSpreadOfVirusDetailsClick)
+    SpreadOfVirusSection(countryName = selectedCountry.name, onSpreadOfVirusDetailsClick = onSpreadOfVirusDetailsClick)
 }
 
 @Composable
 private fun SpreadOfVirusSection(
     modifier: Modifier = Modifier,
+    countryName: String,
     onSpreadOfVirusDetailsClick: () -> Unit
 ) {
     Column(
@@ -117,7 +118,7 @@ private fun SpreadOfVirusSection(
                 fontSize = 12.sp
             )
         }
-        SpreadOfVirusMap(latLng = LatLng(56.0, 27.0))
+        SpreadOfVirusMap(countryName = countryName)
     }
 }
 
