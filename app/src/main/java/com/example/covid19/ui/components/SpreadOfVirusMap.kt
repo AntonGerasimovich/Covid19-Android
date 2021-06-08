@@ -1,5 +1,7 @@
 package com.example.covid19.ui.components
 
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,7 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -23,11 +25,12 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import java.util.*
 
 @Composable
-fun SpreadOfVirusMap(modifier: Modifier = Modifier, latLng: LatLng) {
+fun SpreadOfVirusMap(modifier: Modifier = Modifier, countryName: String) {
     val map = rememberMapViewWithLifecycle()
-    val zoomLevel = remember { 17f }
+    val zoomLevel = remember { 5f }
     Card(
         modifier = modifier
             .padding(16.dp)
@@ -38,7 +41,7 @@ fun SpreadOfVirusMap(modifier: Modifier = Modifier, latLng: LatLng) {
     ) {
         MapContent(
             modifier = modifier.fillMaxSize(),
-            latLng = latLng,
+            countryName = countryName,
             zoomLevel = zoomLevel,
             mapView = map
         )
@@ -48,12 +51,16 @@ fun SpreadOfVirusMap(modifier: Modifier = Modifier, latLng: LatLng) {
 @Composable
 fun MapContent(
     modifier: Modifier = Modifier,
-    latLng: LatLng,
+    countryName: String,
     zoomLevel: Float,
     mapView: MapView
 ) {
+    val context = LocalContext.current
+    val geocoder by remember { mutableStateOf(Geocoder(context, Locale.ENGLISH)) }
     AndroidView(modifier = modifier, factory = { mapView }) { map ->
         map.getMapAsync {
+            val locations: List<Address> = geocoder.getFromLocationName(countryName, 1)
+            val latLng = LatLng(locations.first().latitude, locations.first().longitude)
             it.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel))
             it.addMarker(MarkerOptions().position(latLng))
         }
@@ -102,5 +109,5 @@ private fun rememberMapLifecycleObserver(mapView: MapView): LifecycleEventObserv
 @Preview
 @Composable
 fun PreviewMap() {
-    SpreadOfVirusMap(latLng = LatLng(53.0, 27.0))
+    //SpreadOfVirusMap(countryName = LatLng(53.0, 27.0))
 }
