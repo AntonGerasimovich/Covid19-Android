@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Covid19</string>
+    <string name="infected">Infiziert</string>
+    <string name="dead">Tot</string>
+    <string name="recovered">Wiederhergestellt</string>
+    <string name="all_you_need_is_stay_home">Alles was du brauchst\n ist zu Hause bleiben</string>
+    <string name="get_to_know_about_covid19">" Informieren Sie\n sich über Covid-19"</string>
+    <string name="see_details">"Siehe Einzelheiten "</string>
+    <string name="newest_update">"Neuestes Update "</string>
+    <string name="case_update">Fallaktualisierung</string>
+    <string name="spread_of_virus">Ausbreitung des Virus</string>
+    <string name="cough">Husten</string>
+    <string name="headache">Kopfschmerzen</string>
+    <string name="fever">Fieber</string>
+    <string name="prevention">Verhütung</string>
+    <string name="symptoms">Symptome</string>
+    <string name="wash_hands">"Wasche deine Hände "</string>
+    <string name="wear_mask">Gesichtsmaske tragen</string>
+    <string name="wash_hands_description">Seit Beginn des Ausbruchs des Coronavirus haben einige Orte das Tragen von Gesichtsmasken vollständig angenommen.</string>
+    <string name="wear_mask_description">" Zu diesen Erkrankungen gehören Magen-Darm-Infektionen wie Salmonellen und Atemwegsinfektionen wie Influenza."</string>
+</resources>

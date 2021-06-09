@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Covid19</string>
+    <string name="infected">Заражено</string>
+    <string name="dead">Погибло</string>
+    <string name="recovered">Выздоровело</string>
+    <string name="all_you_need_is_stay_home">Все, что нужно -\nоставаться дома</string>
+    <string name="get_to_know_about_covid19">Узнайте\nпро Covid-19</string>
+    <string name="see_details">Подробнее</string>
+    <string name="newest_update">Последнее обновление</string>
+    <string name="case_update">Обновление случаев</string>
+    <string name="spread_of_virus">Распространение вируса</string>
+    <string name="cough">Кашель</string>
+    <string name="headache">Головная боль</string>
+    <string name="fever">Простуда</string>
+    <string name="prevention">Предотвращение</string>
+    <string name="symptoms">Симптомы</string>
+    <string name="wash_hands">Мойте руки</string>
+    <string name="wear_mask">Носите маску</string>
+    <string name="wash_hands_description">С начала вспышки коронавируса в некоторых местах необходимы маски для лица.</string>
+    <string name="wear_mask_description">Эти заболевания включают желудочно-кишечные инфекции, такие как сальмонелла, респираторные инфекции и грипп.</string>
+</resources>
