@@ -33,7 +33,6 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures {
-        viewBinding true
         compose = true
         // Disable unused AGP features
         buildConfig false
@@ -66,7 +65,7 @@ dependencies {
     //Retrofit
     def retrofitVersion = '2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$rootProject.converterMoshiVersion"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
 
     //Koin
@@ -101,4 +100,7 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test:$rootProject.composeVersion"
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$rootProject.composeVersion"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$rootProject.composeVersion"
+
+    //Timber
+    implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
 }

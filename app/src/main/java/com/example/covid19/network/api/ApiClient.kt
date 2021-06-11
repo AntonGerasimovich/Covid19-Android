@@ -2,8 +2,13 @@ package com.example.covid19.network.api
 
 import com.example.covid19.network.ResultAdapterFactory
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.BuildConfig
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
+import timber.log.Timber
+import okhttp3.Interceptor
+
 import java.util.concurrent.TimeUnit
 
 class ApiClient {
@@ -26,10 +31,16 @@ class ApiClient {
                 .readTimeout(connectionTimeout.toLong(), TimeUnit.SECONDS)
                 .connectTimeout(connectionTimeout.toLong(), TimeUnit.SECONDS)
 
+            if (BuildConfig.DEBUG) {
+                val loggingInterceptor = HttpLoggingInterceptor()
+                loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+                httpClient.addInterceptor(loggingInterceptor)
+            }
+
             retrofit = Retrofit.Builder()
                 .baseUrl(SERVER_URL)
                 .client(httpClient.build())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(MoshiConverterFactory.create())
                 .addCallAdapterFactory(ResultAdapterFactory())
                 .build()
 

@@ -13,18 +13,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.covid19.R
-import com.example.covid19.data.entity.Country
+import com.example.covid19.data.entity.CountryModel
 import com.example.covid19.ui.theme.*
 
 @Composable
 fun CountrySelector(
     modifier: Modifier = Modifier,
-    defaultSelectedCountry: Country,
-    countries: List<Country>,
-    onCountrySelected: (Country) -> Unit = {}
+    defaultSelectedCountry: CountryModel,
+    countries: List<CountryModel>,
+    onCountrySelected: (CountryModel) -> Unit = {}
 ) {
     var expanded: Boolean by remember { mutableStateOf(false) }
-    var selectedCountry: Country by remember { mutableStateOf(defaultSelectedCountry) }
+    var selectedCountry: CountryModel by remember { mutableStateOf(defaultSelectedCountry) }
     Card(
         shape = RoundedCornerShape(50),
         modifier = modifier
