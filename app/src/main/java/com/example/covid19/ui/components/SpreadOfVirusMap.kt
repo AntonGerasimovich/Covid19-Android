@@ -60,9 +60,11 @@ fun MapContent(
     AndroidView(modifier = modifier, factory = { mapView }) { map ->
         map.getMapAsync {
             val locations: List<Address> = geocoder.getFromLocationName(countryName, 1)
-            val latLng = LatLng(locations.first().latitude, locations.first().longitude)
-            it.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel))
-            it.addMarker(MarkerOptions().position(latLng))
+            if (locations.isNotEmpty()) {
+                val latLng = LatLng(locations.first().latitude, locations.first().longitude)
+                it.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel))
+                it.addMarker(MarkerOptions().position(latLng))
+            }
         }
         map.isNestedScrollingEnabled = false
     }
@@ -72,9 +74,7 @@ fun MapContent(
 fun rememberMapViewWithLifecycle(): MapView {
     val context = LocalContext.current
     val mapView = remember {
-        MapView(context).apply {
-            id = R.id.map
-        }
+        MapView(context)
     }
 
     // Makes MapView follow the lifecycle of this composable

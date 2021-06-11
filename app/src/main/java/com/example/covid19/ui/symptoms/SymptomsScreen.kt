@@ -31,10 +31,12 @@ import com.example.covid19.ui.theme.*
 
 @Composable
 fun SymptomsScreen(
-    onMenuClick: () -> Unit = {}
+    onMenuClick: () -> Unit = {},
+    onThemeSwitchClick: () -> Unit = {}
 ) {
     HeaderAndBody(
         onMenuClick = onMenuClick,
+        onThemeSwitchClick = onThemeSwitchClick,
         backgroundImageRes = R.drawable.coronadr,
         titleRes = R.string.get_to_know_about_covid19
     ) {
@@ -45,6 +47,7 @@ fun SymptomsScreen(
 @Composable
 fun HeaderAndBody(
     onMenuClick: () -> Unit,
+    onThemeSwitchClick: () -> Unit,
     @DrawableRes backgroundImageRes: Int,
     @StringRes titleRes: Int,
     body: @Composable () -> Unit
@@ -109,6 +112,18 @@ fun HeaderAndBody(
                 .clickable { onMenuClick() }
                 .padding(8.dp)
                 .wrapContentSize(),
+            tint = White
+        )
+        val isDarkTheme = isSystemInDarkTheme()
+        Icon(
+            painter = painterResource(id = if (isDarkTheme) R.drawable.ic_moon else R.drawable.ic_sun),
+            contentDescription = "Switch Theme",
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .padding(24.dp)
+                .clickable { onThemeSwitchClick() }
+                .padding(8.dp)
+                .size(32.dp),
             tint = White
         )
     }
@@ -237,9 +252,11 @@ fun SymptomCard(
     @DrawableRes symptomIconRes: Int
 ) {
     CardRounded10(modifier = modifier.wrapContentSize(), elevation = 0.5.dp) {
-        Column(modifier = Modifier
-            .padding(8.dp)
-            .padding(start = 8.dp, end = 8.dp)) {
+        Column(
+            modifier = Modifier
+                .padding(8.dp)
+                .padding(start = 8.dp, end = 8.dp)
+        ) {
             Box {
                 Image(
                     modifier = Modifier

@@ -15,6 +15,7 @@ class OverviewViewModel(private val repository: CovidRepository) : ViewModel() {
     val covidCases: StateFlow<CovidCases> = covidCases_
     val countries: MutableStateFlow<List<Country>> = MutableStateFlow(listOf())
     val selectedCountry: MutableStateFlow<Country> = MutableStateFlow(Country("Select a country"))
+    val isDarkTheme: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
     fun getCovidCases(country: Country) {
         selectedCountry.value = country
@@ -25,5 +26,9 @@ class OverviewViewModel(private val repository: CovidRepository) : ViewModel() {
                 null
             }
         }
+    }
+
+    fun changeAppTheme(isDark: Boolean) {
+        isDarkTheme.value = !isDark
     }
 }

@@ -1,6 +1,7 @@
 package com.example.covid19.ui.overview
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -23,7 +24,6 @@ import com.example.covid19.ui.theme.Blue
 import com.example.covid19.ui.theme.Grey
 import com.example.covid19.ui.theme.Typography
 import com.example.covid19.utils.convertToNormalDate
-import com.google.android.gms.maps.model.LatLng
 
 @Composable
 fun OverviewScreen(
@@ -35,8 +35,12 @@ fun OverviewScreen(
     val covidCases = overviewViewModel.covidCases.collectAsState()
     val countries = overviewViewModel.countries.collectAsState()
     val selectedCountry = overviewViewModel.selectedCountry.collectAsState()
+    val isDarkTheme = isSystemInDarkTheme()
     HeaderAndBody(
         onMenuClick = onMenuClick,
+        onThemeSwitchClick = {
+            overviewViewModel.changeAppTheme(isDarkTheme)
+        },
         backgroundImageRes = R.drawable.drcorona,
         titleRes = R.string.all_you_need_is_stay_home
     ) {
@@ -76,7 +80,10 @@ fun OverviewBody(
         date = convertToNormalDate(covidCases.date),
         onSeeDetailsClick = onCaseUpdateDetailsClick
     )
-    SpreadOfVirusSection(countryName = selectedCountry.name, onSpreadOfVirusDetailsClick = onSpreadOfVirusDetailsClick)
+    SpreadOfVirusSection(
+        countryName = selectedCountry.name,
+        onSpreadOfVirusDetailsClick = onSpreadOfVirusDetailsClick
+    )
 }
 
 @Composable

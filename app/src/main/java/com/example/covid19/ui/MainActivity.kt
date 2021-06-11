@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -32,7 +33,8 @@ class MainActivity : AppCompatActivity() {
 
 @Composable
 fun CovidApp(overviewViewModel: OverviewViewModel) {
-    CovidTheme {
+    val isDarkTheme = overviewViewModel.isDarkTheme.collectAsState()
+    CovidTheme(isDarkTheme.value) {
         val navController = rememberNavController()
         NavHost(
             navController = navController,
