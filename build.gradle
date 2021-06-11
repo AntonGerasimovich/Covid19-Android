@@ -32,6 +32,8 @@ buildscript {
         kotlin_version = '1.5.10'
         viewModelVersion = '1.0.0-alpha06'
         composeCostraintVersion = '1.0.0-alpha07'
+        timberVersion = '4.7.1'
+        converterMoshiVersion = '2.9.0'
     }
     repositories {
         google()

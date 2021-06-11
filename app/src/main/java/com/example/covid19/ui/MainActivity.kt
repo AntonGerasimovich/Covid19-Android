@@ -38,16 +38,16 @@ fun CovidApp(overviewViewModel: OverviewViewModel) {
         val navController = rememberNavController()
         NavHost(
             navController = navController,
-            startDestination = CovidScreen.Overview.name
+            startDestination = CovidScreen.Overview().name
         ) {
-            composable(CovidScreen.Overview.name) {
+            composable(CovidScreen.Overview().name) {
                 OverviewScreen(overviewViewModel, onMenuClick = {
-                    navController.navigate(CovidScreen.Symptoms.name)
+                    navController.navigate(CovidScreen.Symptoms().name)
                 })
             }
-            composable(CovidScreen.Symptoms.name) {
+            composable(CovidScreen.Symptoms().name) {
                 SymptomsScreen(onMenuClick = {
-                    navController.navigate(CovidScreen.Overview.name)
+                    navController.navigate(CovidScreen.Overview().name)
                 })
             }
         }

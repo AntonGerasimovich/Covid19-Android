@@ -1,7 +1,7 @@
 package test
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.covid19.data.entity.Country
+import com.example.covid19.data.entity.CountryEntity
 import com.example.covid19.data.repository.CovidRepository
 import com.example.covid19.network.backendReceiver.receive
 import kotlinx.coroutines.runBlocking
@@ -13,14 +13,11 @@ class CountryTest {
     @Test
     fun countriesListNotEmpty() {
         val repository = CovidRepository()
-        val onReceiveData: (Boolean) -> Unit = {
-            assert(it)
-        }
         runBlocking {
-            receive<List<Country>> {
+            receive<List<CountryEntity>> {
                 bind(repository.loadAllCountries(), this@runBlocking)
                 onReceive = {
-                    onReceiveData(!it.isNullOrEmpty())
+                    assert(!it.isNullOrEmpty())
                 }
             }
         }

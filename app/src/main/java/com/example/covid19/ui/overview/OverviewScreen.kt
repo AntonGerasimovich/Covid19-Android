@@ -13,8 +13,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.covid19.R
-import com.example.covid19.data.entity.Country
-import com.example.covid19.data.entity.CovidCases
+import com.example.covid19.data.entity.CountryModel
+import com.example.covid19.data.entity.CovidCasesModel
 import com.example.covid19.ui.components.CountrySelector
 import com.example.covid19.ui.components.CovidCasesRow
 import com.example.covid19.ui.components.SpreadOfVirusMap
@@ -61,11 +61,11 @@ fun OverviewScreen(
 
 @Composable
 fun OverviewBody(
-    selectedCountry: Country,
-    countries: List<Country>,
-    covidCases: CovidCases,
+    selectedCountry: CountryModel,
+    countries: List<CountryModel>,
+    covidCases: CovidCasesModel,
     onCaseUpdateDetailsClick: () -> Unit,
-    onCountrySelected: (Country) -> Unit,
+    onCountrySelected: (CountryModel) -> Unit,
     onSpreadOfVirusDetailsClick: () -> Unit
 ) {
     CountrySelector(
@@ -132,7 +132,7 @@ private fun SpreadOfVirusSection(
 @Composable
 private fun CaseUpdateSection(
     modifier: Modifier = Modifier,
-    covidCases: CovidCases,
+    covidCases: CovidCasesModel,
     date: String,
     onSeeDetailsClick: () -> Unit
 ) {
