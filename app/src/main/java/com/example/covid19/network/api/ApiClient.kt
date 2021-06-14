@@ -6,9 +6,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.BuildConfig
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import timber.log.Timber
-import okhttp3.Interceptor
-
 import java.util.concurrent.TimeUnit
 
 class ApiClient {

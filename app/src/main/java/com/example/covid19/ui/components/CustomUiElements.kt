@@ -3,6 +3,7 @@ package com.example.covid19.ui.components
 import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,7 +16,7 @@ import com.example.covid19.ui.theme.White
 @Composable
 fun CardRounded10(
     modifier: Modifier = Modifier,
-    backgroundColor: Color = White,
+    backgroundColor: Color = MaterialTheme.colors.surface,
     elevation: Dp = 2.dp,
     content: @Composable () -> Unit
 ) {
@@ -31,7 +32,7 @@ fun CardRounded10(
 @Composable
 fun CardRounded20(
     modifier: Modifier = Modifier,
-    backgroundColor: Color = White,
+    backgroundColor: Color = MaterialTheme.colors.surface,
     elevation: Dp = 2.dp,
     content: @Composable () -> Unit
 ) {
@@ -63,7 +64,7 @@ fun CurvedShape(
 
     Surface(
         shape = curvedShape,
-        color = MilkWhite,
+        color = MaterialTheme.colors.background,
         modifier = modifier
     ) { }
 }

@@ -1,8 +1,8 @@
 package com.example.covid19.ui.overview
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -19,9 +19,6 @@ import com.example.covid19.ui.components.CountrySelector
 import com.example.covid19.ui.components.CovidCasesRow
 import com.example.covid19.ui.components.SpreadOfVirusMap
 import com.example.covid19.ui.symptoms.HeaderAndBody
-import com.example.covid19.ui.theme.Black
-import com.example.covid19.ui.theme.Blue
-import com.example.covid19.ui.theme.Grey
 import com.example.covid19.ui.theme.Typography
 import com.example.covid19.utils.convertToNormalDate
 
@@ -35,11 +32,12 @@ fun OverviewScreen(
     val covidCases = overviewViewModel.covidCases.collectAsState()
     val countries = overviewViewModel.countries.collectAsState()
     val selectedCountry = overviewViewModel.selectedCountry.collectAsState()
-    val isDarkTheme = isSystemInDarkTheme()
+    val isDarkTheme = overviewViewModel.isDarkTheme.collectAsState()
     HeaderAndBody(
+        isDarkTheme = isDarkTheme.value,
         onMenuClick = onMenuClick,
         onThemeSwitchClick = {
-            overviewViewModel.changeAppTheme(isDarkTheme)
+            overviewViewModel.changeAppTheme(isDarkTheme.value)
         },
         backgroundImageRes = R.drawable.drcorona,
         titleRes = R.string.all_you_need_is_stay_home
@@ -112,7 +110,7 @@ private fun SpreadOfVirusSection(
                     modifier = Modifier.wrapContentSize(),
                     text = stringResource(id = R.string.spread_of_virus),
                     style = Typography.h6,
-                    color = Black
+                    color = MaterialTheme.colors.secondary
                 )
             }
             Text(
@@ -121,7 +119,7 @@ private fun SpreadOfVirusSection(
                     .clickable { onSpreadOfVirusDetailsClick() }
                     .align(Alignment.CenterEnd), text = stringResource(id = R.string.see_details),
                 style = Typography.button,
-                color = Blue,
+                color = MaterialTheme.colors.primary,
                 fontSize = 12.sp
             )
         }
@@ -163,13 +161,13 @@ fun CaseUpdateTitle(date: String, onSeeDetailsClick: () -> Unit) {
                 modifier = Modifier.wrapContentSize(),
                 text = stringResource(id = R.string.case_update),
                 style = Typography.h6,
-                color = Black
+                color = MaterialTheme.colors.secondary
             )
             Text(
                 modifier = Modifier.wrapContentSize(),
                 text = stringResource(id = R.string.newest_update) + " $date",
                 style = Typography.subtitle2,
-                color = Grey
+                color = MaterialTheme.colors.secondary
             )
         }
         Text(
@@ -180,7 +178,7 @@ fun CaseUpdateTitle(date: String, onSeeDetailsClick: () -> Unit) {
                 }
                 .align(Alignment.BottomEnd), text = stringResource(id = R.string.see_details),
             style = Typography.button,
-            color = Blue,
+            color = MaterialTheme.colors.primary,
             fontSize = 12.sp
         )
     }

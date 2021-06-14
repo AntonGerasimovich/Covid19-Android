@@ -46,7 +46,7 @@ fun CovidApp(overviewViewModel: OverviewViewModel) {
                 })
             }
             composable(CovidScreen.Symptoms().name) {
-                SymptomsScreen(onMenuClick = {
+                SymptomsScreen(overviewViewModel, onMenuClick = {
                     navController.navigate(CovidScreen.Overview().name)
                 })
             }
