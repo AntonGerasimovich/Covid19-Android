@@ -1,6 +1,7 @@
 package com.example.covid19.ui.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -31,9 +32,9 @@ fun CountrySelector(
             .fillMaxWidth()
             .wrapContentHeight()
             .clickable(onClick = { expanded = true }),
-        backgroundColor = White,
+        backgroundColor = MaterialTheme.colors.surface,
         elevation = 0.dp,
-        border = BorderStroke(0.5.dp, Grey)
+        border = BorderStroke(0.5.dp, DarkGrey)
     ) {
         Row(
             modifier = Modifier
@@ -60,7 +61,7 @@ fun CountrySelector(
                     .weight(1f),
                 text = selectedCountry.name,
                 style = Typography.body1,
-                color = Black
+                color = MaterialTheme.colors.secondary
             )
             Box(
                 modifier = Modifier
@@ -74,14 +75,16 @@ fun CountrySelector(
                         .align(CenterEnd)
                         .size(14.dp)
                         .clickable(onClick = { expanded = true }),
-                    tint = Blue
+                    tint = MaterialTheme.colors.primaryVariant
                 )
                 DropdownMenu(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().background(MaterialTheme.colors.background),
                     expanded = expanded,
                     onDismissRequest = { expanded = false }) {
                     for (country in countries) {
-                        DropdownMenuItem(onClick = {
+                        DropdownMenuItem(
+                            modifier = Modifier.background(MaterialTheme.colors.background),
+                            onClick = {
                             expanded = false
                             selectedCountry = country
                             onCountrySelected(country)
@@ -89,7 +92,7 @@ fun CountrySelector(
                             Text(
                                 text = country.name,
                                 style = Typography.body1,
-                                color = Black
+                                color = MaterialTheme.colors.secondary
                             )
                         }
                     }

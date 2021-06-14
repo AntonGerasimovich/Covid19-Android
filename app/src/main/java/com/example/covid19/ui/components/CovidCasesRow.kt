@@ -2,6 +2,7 @@ package com.example.covid19.ui.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.Center
@@ -25,6 +26,7 @@ fun CovidCasesRow(
 ) {
     CardRounded20(
         elevation = 0.5.dp,
+        backgroundColor = MaterialTheme.colors.surface,
         modifier = Modifier.padding(16.dp)
     ) {
         Column {
@@ -89,21 +91,21 @@ fun CovidCasesRow(
                 Text(
                     modifier = modifier,
                     style = Typography.body1,
-                    color = Grey,
+                    color = MaterialTheme.colors.secondaryVariant,
                     textAlign = TextAlign.Center,
                     text = stringResource(id = R.string.infected)
                 )
                 Text(
                     modifier = modifier,
                     style = Typography.body1,
-                    color = Grey,
+                    color = MaterialTheme.colors.secondaryVariant,
                     textAlign = TextAlign.Center,
                     text = stringResource(id = R.string.dead)
                 )
                 Text(
                     modifier = modifier,
                     style = Typography.body1,
-                    color = Grey,
+                    color = MaterialTheme.colors.secondaryVariant,
                     textAlign = TextAlign.Center,
                     text = stringResource(id = R.string.recovered)
                 )

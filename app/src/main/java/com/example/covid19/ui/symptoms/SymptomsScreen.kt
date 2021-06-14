@@ -5,9 +5,11 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.BottomCenter
 import androidx.compose.ui.Alignment.Companion.BottomEnd
@@ -16,6 +18,7 @@ import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.CenterStart
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -27,14 +30,20 @@ import com.example.covid19.R
 import com.example.covid19.ui.components.CardRounded10
 import com.example.covid19.ui.components.CardRounded20
 import com.example.covid19.ui.components.CurvedShape
-import com.example.covid19.ui.theme.*
+import com.example.covid19.ui.overview.OverviewViewModel
+import com.example.covid19.ui.theme.Blue
+import com.example.covid19.ui.theme.DeepBlue
+import com.example.covid19.ui.theme.Typography
 
 @Composable
 fun SymptomsScreen(
+    overviewViewModel: OverviewViewModel,
     onMenuClick: () -> Unit = {},
     onThemeSwitchClick: () -> Unit = {}
 ) {
+    val isDarkTheme = overviewViewModel.isDarkTheme.collectAsState()
     HeaderAndBody(
+        isDarkTheme = isDarkTheme.value,
         onMenuClick = onMenuClick,
         onThemeSwitchClick = onThemeSwitchClick,
         backgroundImageRes = R.drawable.coronadr,
@@ -46,6 +55,7 @@ fun SymptomsScreen(
 
 @Composable
 fun HeaderAndBody(
+    isDarkTheme: Boolean,
     onMenuClick: () -> Unit,
     onThemeSwitchClick: () -> Unit,
     @DrawableRes backgroundImageRes: Int,
@@ -65,7 +75,7 @@ fun HeaderAndBody(
                 .padding(top = 70.dp, end = 16.dp),
             text = stringResource(id = titleRes),
             style = Typography.h5,
-            color = White
+            color = MaterialTheme.colors.surface
         )
         Image(
             painter = painterResource(id = backgroundImageRes),
@@ -97,7 +107,7 @@ fun HeaderAndBody(
                     .height(400.dp * 0.2f)
                     .fillMaxWidth()
             )
-            Surface(modifier = Modifier.fillMaxSize(), color = MilkWhite) {
+            Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
                 Column {
                     body()
                 }
@@ -107,14 +117,14 @@ fun HeaderAndBody(
             painter = painterResource(id = R.drawable.ic_menu),
             contentDescription = "Menu",
             modifier = Modifier
+                .testTag("Menu Icon")
                 .align(Alignment.TopEnd)
                 .padding(24.dp)
                 .clickable { onMenuClick() }
                 .padding(8.dp)
                 .wrapContentSize(),
-            tint = White
+            tint = MaterialTheme.colors.surface
         )
-        val isDarkTheme = isSystemInDarkTheme()
         Icon(
             painter = painterResource(id = if (isDarkTheme) R.drawable.ic_moon else R.drawable.ic_sun),
             contentDescription = "Switch Theme",
@@ -124,7 +134,7 @@ fun HeaderAndBody(
                 .clickable { onThemeSwitchClick() }
                 .padding(8.dp)
                 .size(32.dp),
-            tint = White
+            tint = MaterialTheme.colors.surface
         )
     }
 }
@@ -142,7 +152,7 @@ fun PreventionSection(modifier: Modifier = Modifier) {
             modifier = modifier.padding(top = 32.dp),
             text = stringResource(id = R.string.prevention),
             style = Typography.h6,
-            color = Black
+            color = MaterialTheme.colors.secondary
         )
         PreventionCard(
             modifier = modifier,
@@ -183,13 +193,13 @@ fun PreventionCard(
                     Text(
                         text = stringResource(id = title),
                         style = Typography.h6,
-                        color = Black,
+                        color = MaterialTheme.colors.secondary,
                         fontSize = 14.sp
                     )
                     Text(
                         text = stringResource(id = description),
                         style = Typography.body1,
-                        color = Grey,
+                        color = MaterialTheme.colors.background,
                         fontSize = 12.sp
                     )
                 }
@@ -219,7 +229,7 @@ fun SymptomsSection(modifier: Modifier = Modifier) {
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
             text = stringResource(id = R.string.symptoms),
             style = Typography.h6,
-            color = Black
+            color = MaterialTheme.colors.secondary
         )
         Row(
             modifier = modifier
@@ -281,7 +291,7 @@ fun SymptomCard(
                 style = Typography.body1,
                 fontWeight = FontWeight.SemiBold,
                 textAlign = TextAlign.Center,
-                color = Black
+                color = MaterialTheme.colors.secondary
             )
         }
     }
@@ -290,5 +300,5 @@ fun SymptomCard(
 @Preview
 @Composable
 fun PreviewSymptoms() {
-    SymptomsScreen()
+    //SymptomsScreen()
 }
