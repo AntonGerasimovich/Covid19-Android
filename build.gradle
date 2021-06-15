@@ -34,6 +34,7 @@ buildscript {
         composeCostraintVersion = '1.0.0-alpha07'
         timberVersion = '4.7.1'
         converterMoshiVersion = '2.9.0'
+        navigationVersion  = '2.4.0-alpha02'
     }
     repositories {
         google()

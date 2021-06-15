@@ -161,7 +161,7 @@ fun ShowCovidCases() {
     //CovidCasesRow(covidCases = CovidCases(356534, 421, 545545454))
 }
 
-private fun adjustNumber(number: Int): String = when (number) {
+fun adjustNumber(number: Int): String = when (number) {
     in (0..999) -> number.toString()
     in (1000..9999) -> "${number / 1000}.${number.toString()[1]}k"
     in (10000..99999) -> "${number / 1000}.${number.toString()[2]}k"
