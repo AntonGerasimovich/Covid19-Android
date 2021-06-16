@@ -38,9 +38,9 @@ fun CountrySelector(
     ) {
         Row(
             modifier = Modifier
+                .clickable(onClick = { expanded = true })
                 .padding(16.dp)
-                .wrapContentHeight()
-                .clickable(onClick = { expanded = true }),
+                .wrapContentHeight(),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = CenterVertically
         ) {

@@ -1,5 +1,7 @@
 package com.example.covid19.data.entity
 
+import androidx.annotation.StringRes
+import com.example.covid19.R
 import com.squareup.moshi.Json
 
 data class CovidCasesEntity(
@@ -16,3 +18,20 @@ data class CovidCasesEntity(
 )
 
 fun CovidCasesEntity.mapToModel() = CovidCasesModel(country, infected, recovered, dead, date)
+
+sealed class CaseType {
+    data class NewCases(@StringRes val name: Int = R.string.new_cases) : CaseType()
+    data class LethalCases(@StringRes val name: Int = R.string.lethal) : CaseType()
+
+    companion object {
+        val dropdownContentCaseType = arrayListOf(
+            NewCases().name,
+            LethalCases().name
+        )
+        fun getCaseType(@StringRes name: Int) = when (name) {
+            NewCases().name -> NewCases()
+            LethalCases().name -> LethalCases()
+            else -> NewCases()
+        }
+    }
+}
