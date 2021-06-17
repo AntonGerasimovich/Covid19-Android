@@ -17,6 +17,7 @@ import com.example.covid19.data.entity.CountryModel
 import com.example.covid19.data.entity.CovidCasesModel
 import com.example.covid19.ui.components.CountrySelector
 import com.example.covid19.ui.components.CovidCasesRow
+import com.example.covid19.ui.components.CovidHistoryGraph
 import com.example.covid19.ui.components.SpreadOfVirusMap
 import com.example.covid19.ui.symptoms.HeaderAndBody
 import com.example.covid19.ui.theme.Typography
@@ -43,6 +44,7 @@ fun OverviewScreen(
         titleRes = R.string.all_you_need_is_stay_home
     ) {
         OverviewBody(
+            overviewViewModel = overviewViewModel,
             selectedCountry = selectedCountry.value,
             countries = countries.value,
             covidCases = covidCases.value,
@@ -59,6 +61,7 @@ fun OverviewScreen(
 
 @Composable
 fun OverviewBody(
+    overviewViewModel: OverviewViewModel,
     selectedCountry: CountryModel,
     countries: List<CountryModel>,
     covidCases: CovidCasesModel,
@@ -82,6 +85,7 @@ fun OverviewBody(
         countryName = selectedCountry.name,
         onSpreadOfVirusDetailsClick = onSpreadOfVirusDetailsClick
     )
+    CovidHistoryGraph(modifier = Modifier.padding(16.dp), overviewViewModel = overviewViewModel)
 }
 
 @Composable

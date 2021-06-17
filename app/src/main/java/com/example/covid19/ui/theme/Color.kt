@@ -16,6 +16,8 @@ val LightGreen = Color(0xFF82d999)
 val LightRed = Color(0xFFeb877a)
 val LightOrange = Color(0xFFf0b960)
 val DeepBlue = Color(0xFF272191)
+val GraphBlue = Color(0xFFaecbfa)
+val GraphDeepBlue = Color(0xFF1966d2)
 
 val LightColorPalette = lightColors(
     primary = DeepBlue,

@@ -20,4 +20,11 @@
     <string name="wear_mask">Wear face mask</string>
     <string name="wash_hands_description">Since the start of coronavirus\noutbreak some places have fully\nembraced wearing face masks.</string>
     <string name="wear_mask_description">These diseases include gastrointestinal\ninfections, such as Salmonella, and respiratory\ninfections, such as influenza.</string>
+    <string name="all_time">All time</string>
+    <string name="week">Last week</string>
+    <string name="month">Last month</string>
+    <string name="two_weeks">Two weeks</string>
+    <string name="new_cases">New cases</string>
+    <string name="lethal">Lethal cases</string>
+    <string name="average">Avg. 7 d.</string>
 </resources>
