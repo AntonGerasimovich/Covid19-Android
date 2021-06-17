@@ -19,4 +19,11 @@
     <string name="wear_mask">Носите маску</string>
     <string name="wash_hands_description">С начала вспышки коронавируса в некоторых местах необходимы маски для лица.</string>
     <string name="wear_mask_description">Эти заболевания включают желудочно-кишечные инфекции, такие как сальмонелла, респираторные инфекции и грипп.</string>
+    <string name="all_time">Всё время</string>
+    <string name="week">За неделю</string>
+    <string name="month">За месяц</string>
+    <string name="two_weeks">За две недели</string>
+    <string name="new_cases">Новые случаи</string>
+    <string name="lethal">Смерти</string>
+    <string name="average">Ср. за 7 дн.</string>
 </resources>

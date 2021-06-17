@@ -19,4 +19,11 @@
     <string name="wear_mask">Gesichtsmaske tragen</string>
     <string name="wash_hands_description">Seit Beginn des Ausbruchs des Coronavirus haben einige Orte das Tragen von Gesichtsmasken vollständig angenommen.</string>
     <string name="wear_mask_description">" Zu diesen Erkrankungen gehören Magen-Darm-Infektionen wie Salmonellen und Atemwegsinfektionen wie Influenza."</string>
+    <string name="all_time">Alle zeit</string>
+    <string name="week">Letzte woche</string>
+    <string name="month">Letzten monat</string>
+    <string name="two_weeks">Zwei wochen</string>
+    <string name="new_cases">Neue fälle</string>
+    <string name="lethal">Tödliche fälle</string>
+    <string name="average">Dur. 7 Tage</string>
 </resources>
