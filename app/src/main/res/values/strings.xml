@@ -27,4 +27,5 @@
     <string name="new_cases">New cases</string>
     <string name="lethal">Lethal cases</string>
     <string name="average">Avg. 7 d.</string>
+    <string name="cases">Cases</string>
 </resources>

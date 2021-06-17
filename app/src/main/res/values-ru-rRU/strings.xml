@@ -26,4 +26,5 @@
     <string name="new_cases">Новые случаи</string>
     <string name="lethal">Смерти</string>
     <string name="average">Ср. за 7 дн.</string>
+    <string name="cases">Случаев</string>
 </resources>

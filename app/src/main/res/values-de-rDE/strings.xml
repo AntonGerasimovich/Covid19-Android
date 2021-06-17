@@ -26,4 +26,5 @@
     <string name="new_cases">Neue fälle</string>
     <string name="lethal">Tödliche fälle</string>
     <string name="average">Dur. 7 Tage</string>
+    <string name="cases">Fälle</string>
 </resources>

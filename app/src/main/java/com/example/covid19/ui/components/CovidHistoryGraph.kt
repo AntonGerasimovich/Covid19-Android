@@ -81,6 +81,7 @@ fun CovidHistoryGraph(
                 )
                 Row(
                     modifier = Modifier
+                        .fillMaxWidth()
                         .align(Start)
                         .padding(16.dp)
                 ) {
@@ -89,14 +90,17 @@ fun CovidHistoryGraph(
                     val date =
                         if (selectedPoint in graphData.value.indices) convertToNormalDate(graphData.value[selectedPoint].date) else ""
                     GraphHint(
+                        modifier = Modifier.weight(1f),
                         circleColor = GraphBlue,
-                        text = stringResource(id = R.string.new_cases) + " $number"
+                        text = stringResource(id = R.string.cases) + " $number"
                     )
                     GraphHint(
+                        modifier = Modifier.weight(1f),
                         circleColor = GraphDeepBlue,
                         text = stringResource(id = R.string.average)
                     )
                     GraphHint(
+                        modifier = Modifier.weight(1f),
                         circleColor = Green,
                         text = date
                     )
@@ -108,19 +112,25 @@ fun CovidHistoryGraph(
 
 @Composable
 fun GraphHint(modifier: Modifier = Modifier, circleColor: Color, text: String) {
-    Row(modifier = Modifier
-        .wrapContentSize()
-        .padding(end = 16.dp)) {
-        Canvas(modifier = modifier
-            .align(CenterVertically)
-            .padding(end = 8.dp)) {
+    Row(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(end = 16.dp)
+    ) {
+        Canvas(
+            modifier = Modifier
+                .align(CenterVertically)
+                .wrapContentSize()
+                .padding(end = 8.dp)
+        ) {
             drawCircle(color = circleColor, radius = 14f)
         }
         Text(
-            modifier = modifier.align(CenterVertically),
+            modifier = Modifier.align(CenterVertically),
             text = text,
             style = Typography.subtitle2,
-            color = DarkGrey
+            color = DarkGrey,
+            maxLines = 1
         )
     }
 }
