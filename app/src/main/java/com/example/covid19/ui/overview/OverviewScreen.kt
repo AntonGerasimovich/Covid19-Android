@@ -6,8 +6,10 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,13 +29,15 @@ import com.example.covid19.utils.convertToNormalDate
 fun OverviewScreen(
     overviewViewModel: OverviewViewModel,
     onMenuClick: () -> Unit,
-    onCaseUpdateDetailsClick: () -> Unit = {},
     onSpreadOfVirusDetailsClick: () -> Unit = {}
 ) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
     val covidCases = overviewViewModel.covidCases.collectAsState()
     val countries = overviewViewModel.countries.collectAsState()
     val selectedCountry = overviewViewModel.selectedCountry.collectAsState()
     val isDarkTheme = overviewViewModel.isDarkTheme.collectAsState()
+    overviewViewModel.checkIfCountryIsFollowed(context, scope, selectedCountry.value)
     HeaderAndBody(
         isDarkTheme = isDarkTheme.value,
         onMenuClick = onMenuClick,
@@ -48,8 +52,8 @@ fun OverviewScreen(
             selectedCountry = selectedCountry.value,
             countries = countries.value,
             covidCases = covidCases.value,
-            onCaseUpdateDetailsClick = {
-                onCaseUpdateDetailsClick()
+            onFollowClick = {
+                overviewViewModel.onFollowClick(context, scope, selectedCountry.value)
             }, onCountrySelected = {
                 overviewViewModel.getCovidCases(it)
             }, onSpreadOfVirusDetailsClick = {
@@ -65,7 +69,7 @@ fun OverviewBody(
     selectedCountry: CountryModel,
     countries: List<CountryModel>,
     covidCases: CovidCasesModel,
-    onCaseUpdateDetailsClick: () -> Unit,
+    onFollowClick: () -> Unit,
     onCountrySelected: (CountryModel) -> Unit,
     onSpreadOfVirusDetailsClick: () -> Unit
 ) {
@@ -78,8 +82,9 @@ fun OverviewBody(
     CaseUpdateSection(
         modifier = Modifier.padding(bottom = 16.dp),
         covidCases = covidCases,
+        following = selectedCountry.following,
         date = convertToNormalDate(covidCases.date),
-        onSeeDetailsClick = onCaseUpdateDetailsClick
+        onFollowClick = onFollowClick
     )
     SpreadOfVirusSection(
         countryName = selectedCountry.name,
@@ -135,21 +140,22 @@ private fun SpreadOfVirusSection(
 private fun CaseUpdateSection(
     modifier: Modifier = Modifier,
     covidCases: CovidCasesModel,
+    following: Boolean,
     date: String,
-    onSeeDetailsClick: () -> Unit
+    onFollowClick: () -> Unit
 ) {
     Column(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
     ) {
-        CaseUpdateTitle(date = date, onSeeDetailsClick = onSeeDetailsClick)
+        CaseUpdateTitle(date = date, following = following, onFollowClick = onFollowClick)
         CovidCasesRow(covidCases = covidCases)
     }
 }
 
 @Composable
-fun CaseUpdateTitle(date: String, onSeeDetailsClick: () -> Unit) {
+fun CaseUpdateTitle(date: String, following: Boolean, onFollowClick: () -> Unit) {
     Box(
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp)
@@ -178,9 +184,10 @@ fun CaseUpdateTitle(date: String, onSeeDetailsClick: () -> Unit) {
             modifier = Modifier
                 .wrapContentSize()
                 .clickable {
-                    onSeeDetailsClick()
+                    onFollowClick()
                 }
-                .align(Alignment.BottomEnd), text = stringResource(id = R.string.see_details),
+                .align(Alignment.BottomEnd),
+            text = if (following) stringResource(id = R.string.following) else stringResource(id = R.string.follow),
             style = Typography.button,
             color = MaterialTheme.colors.primary,
             fontSize = 12.sp

@@ -78,7 +78,7 @@ fun CountrySelector(
                     tint = MaterialTheme.colors.primaryVariant
                 )
                 DropdownMenu(
-                    modifier = Modifier.fillMaxWidth().background(MaterialTheme.colors.background),
+                    modifier = Modifier.wrapContentSize().background(MaterialTheme.colors.background),
                     expanded = expanded,
                     onDismissRequest = { expanded = false }) {
                     for (country in countries) {

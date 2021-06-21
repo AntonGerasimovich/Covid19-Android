@@ -9,8 +9,8 @@ buildscript {
 
         // App dependencies
         appCompatVersion = '1.2.0-rc01'
-        activityComposeVersion = '1.3.0-beta01'
-        composeVersion = '1.0.0-beta08'
+        activityComposeVersion = '1.3.0-beta02'
+        composeVersion = '1.0.0-beta09'
         coreTestingVersion = '2.1.0'
         coroutinesVersion = "1.4.2"
         espressoVersion = '3.3.0'
@@ -30,11 +30,14 @@ buildscript {
         workVersion = '2.5.0'
         koin_version= "2.2.2"
         kotlin_version = '1.5.10'
-        viewModelVersion = '1.0.0-alpha06'
-        composeCostraintVersion = '1.0.0-alpha07'
+        viewModelVersion = '1.0.0-alpha07'
+        composeCostraintVersion = '1.0.0-alpha08'
         timberVersion = '4.7.1'
         converterMoshiVersion = '2.9.0'
-        navigationVersion  = '2.4.0-alpha02'
+        navigationVersion  = '2.4.0-alpha03'
+        coroutinesTestVersion = '1.5.0'
+        dataStoreVersion = '1.0.0-beta02'
+        workVersion = '2.5.0'
     }
     repositories {
         google()

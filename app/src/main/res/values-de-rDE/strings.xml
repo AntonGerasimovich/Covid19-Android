@@ -27,4 +27,6 @@
     <string name="lethal">Tödliche fälle</string>
     <string name="average">Dur. 7 Tage</string>
     <string name="cases">Fälle</string>
+    <string name="follow">Folgen</string>
+    <string name="following">Folge</string>
 </resources>

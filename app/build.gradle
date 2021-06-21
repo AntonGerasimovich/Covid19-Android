@@ -111,7 +111,7 @@ dependencies {
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
-    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0-native-mt'
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$rootProject.coroutinesTestVersion"
     testImplementation 'androidx.test:core:1.3.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
 
@@ -122,4 +122,11 @@ dependencies {
 
     //Timber
     implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
+
+    //Data Store
+    implementation "androidx.datastore:datastore:$rootProject.dataStoreVersion"
+    implementation "androidx.datastore:datastore-preferences:$rootProject.dataStoreVersion"
+
+    //Work Manager
+    implementation "androidx.work:work-runtime-ktx:$rootProject.workVersion"
 }
