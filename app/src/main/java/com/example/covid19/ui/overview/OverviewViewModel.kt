@@ -1,10 +1,13 @@
 package com.example.covid19.ui.overview
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.covid19.data.entity.*
 import com.example.covid19.data.repository.CovidRepository
 import com.example.covid19.network.backendReceiver.receive
+import com.example.covid19.utils.CountryManager
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -19,6 +22,7 @@ class OverviewViewModel(private val repository: CovidRepository) : ViewModel() {
     private var timestampModel: TimestampModel = TimestampModel.AllTime()
     private var caseType: CaseType = CaseType.NewCases()
     private var rawData: List<CovidCasesModel> = listOf()
+    val countryLiveUpdates: MutableStateFlow<CountryModel> = MutableStateFlow(CountryModel())
     val graphData: MutableStateFlow<List<GraphDataModel>> = MutableStateFlow(listOf())
 
     fun getCovidCases(country: CountryModel) {
@@ -31,9 +35,30 @@ class OverviewViewModel(private val repository: CovidRepository) : ViewModel() {
                         .mapToModel() else CovidCasesModel(country.name, 0, 0, 0)
                 rawData = it.map { entity -> entity.mapToModel() }
                 convertRawDataToGraphData()
-                null
             }
         }
+    }
+
+    fun onFollowClick(context: Context, scope: CoroutineScope, country: CountryModel) {
+        CountryManager.getSavedCountry(context, scope, onComplete = {
+            if (it.name == country.name) {
+                selectedCountry.value = CountryModel(country.name, country.shortName, !it.following)
+                CountryManager.overwriteCountry(context, scope, selectedCountry.value)
+            } else {
+                val countryModel = CountryModel(country.name, country.shortName, true)
+                selectedCountry.value = countryModel
+                CountryManager.overwriteCountry(context, scope, selectedCountry.value)
+                countryLiveUpdates.value = countryModel
+            }
+        })
+    }
+
+    fun checkIfCountryIsFollowed(context: Context, scope: CoroutineScope, country: CountryModel) {
+        CountryManager.isCountryFollowed(context, scope, countryModel = country, onComplete = {
+            if (it) {
+                selectedCountry.value = CountryModel(country.name, country.shortName, it)
+            }
+        })
     }
 
     fun onTimestampPicked(timestampModel: TimestampModel) {
