@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Covid19</string>
-    <string name="action_settings" translatable="false">Settings</string>
     <string name="infected">Infected</string>
     <string name="dead">Dead</string>
     <string name="recovered">Recovered</string>
@@ -12,7 +11,6 @@
     <string name="newest_update">Newest update </string>
     <string name="case_update">Case Update</string>
     <string name="spread_of_virus">Spread of Virus</string>
-    <string name="title_activity_maps" translatable="false">MapsActivity</string>
     <string name="cough">Cough</string>
     <string name="headache">Headache</string>
     <string name="fever">Fever</string>

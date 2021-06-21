@@ -28,6 +28,7 @@ sealed class CaseType {
             NewCases().name,
             LethalCases().name
         )
+
         fun getCaseType(@StringRes name: Int) = when (name) {
             NewCases().name -> NewCases()
             LethalCases().name -> LethalCases()

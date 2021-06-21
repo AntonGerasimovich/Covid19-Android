@@ -8,6 +8,6 @@ data class CountryModel(
     var name: String = "",
     var shortName: String = "",
     var following: Boolean = false
-): Parcelable
+) : Parcelable
 
 fun CountryModel.mapToEntity() = CountryEntity(name, shortName)

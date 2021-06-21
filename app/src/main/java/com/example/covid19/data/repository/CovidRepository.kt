@@ -12,5 +12,6 @@ class CovidRepository {
 
     fun loadAllCountries(): Flow<Result<List<CountryEntity>>> = flow { emit(api.getCountries()) }
 
-    fun getDataByCountry(countryName: String): Flow<Result<List<CovidCasesEntity>>> = flow { emit(api.getDataByCountry(countryName)) }
+    fun getDataByCountry(countryName: String): Flow<Result<List<CovidCasesEntity>>> =
+        flow { emit(api.getDataByCountry(countryName)) }
 }

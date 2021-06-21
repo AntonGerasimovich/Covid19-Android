@@ -12,7 +12,6 @@ import com.example.covid19.data.repository.CovidRepository
 import com.example.covid19.network.backendReceiver.receive
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -65,7 +64,12 @@ object CountryManager {
         }
     }
 
-    fun isCountryFollowed(context: Context, scope: CoroutineScope, countryModel: CountryModel, onComplete: (Boolean) -> Unit) {
+    fun isCountryFollowed(
+        context: Context,
+        scope: CoroutineScope,
+        countryModel: CountryModel,
+        onComplete: (Boolean) -> Unit
+    ) {
         val dataStore = context.dataStore
         dataStore.data.onEach {
             val isFollowing = if (it[UserScheme.FIELD_NAME] == countryModel.name) {

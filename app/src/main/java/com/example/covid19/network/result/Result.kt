@@ -25,8 +25,6 @@ sealed class Result<out T> {
         }
     }
 
-
-
     sealed class Failure<E : Throwable>(open val error: E? = null) : Result<Nothing>() {
 
         override fun toString() = "Failure($error)"

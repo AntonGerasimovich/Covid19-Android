@@ -14,7 +14,7 @@ fun <T> Result<T>.asSuccess(): Result.Success<T> {
 @OptIn(ExperimentalContracts::class)
 fun <T> Result<T>.isFailure(): Boolean {
     contract {
-        returns(true) implies(this@isFailure is Result.Failure<*>)
+        returns(true) implies (this@isFailure is Result.Failure<*>)
     }
     return this is Result.Failure<*>
 }

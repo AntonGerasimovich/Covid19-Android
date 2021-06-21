@@ -16,7 +16,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.covid19.R
-import com.example.covid19.data.entity.CovidCasesEntity
 import com.example.covid19.data.entity.CovidCasesModel
 import com.example.covid19.ui.theme.*
 

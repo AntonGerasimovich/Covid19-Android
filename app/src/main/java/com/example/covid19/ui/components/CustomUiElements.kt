@@ -10,8 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.covid19.ui.theme.MilkWhite
-import com.example.covid19.ui.theme.White
 
 @Composable
 fun CardRounded10(

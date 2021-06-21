@@ -15,7 +15,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.covid19.R
 import com.example.covid19.data.entity.CountryModel
-import com.example.covid19.ui.theme.*
+import com.example.covid19.ui.theme.Blue
+import com.example.covid19.ui.theme.DarkGrey
+import com.example.covid19.ui.theme.Typography
 
 @Composable
 fun CountrySelector(
@@ -78,17 +80,19 @@ fun CountrySelector(
                     tint = MaterialTheme.colors.primaryVariant
                 )
                 DropdownMenu(
-                    modifier = Modifier.wrapContentSize().background(MaterialTheme.colors.background),
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .background(MaterialTheme.colors.background),
                     expanded = expanded,
                     onDismissRequest = { expanded = false }) {
                     for (country in countries) {
                         DropdownMenuItem(
                             modifier = Modifier.background(MaterialTheme.colors.background),
                             onClick = {
-                            expanded = false
-                            selectedCountry = country
-                            onCountrySelected(country)
-                        }) {
+                                expanded = false
+                                selectedCountry = country
+                                onCountrySelected(country)
+                            }) {
                             Text(
                                 text = country.name,
                                 style = Typography.body1,

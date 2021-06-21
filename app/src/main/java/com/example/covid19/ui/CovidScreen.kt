@@ -1,10 +1,8 @@
 package com.example.covid19.ui
 
-import java.lang.IllegalArgumentException
-
 sealed class CovidScreen {
-    data class Overview(val name: String = "Overview"): CovidScreen()
-    data class Symptoms(val name: String = "Symptoms"): CovidScreen()
+    data class Overview(val name: String = "Overview") : CovidScreen()
+    data class Symptoms(val name: String = "Symptoms") : CovidScreen()
 
     companion object {
         fun fromRoute(route: String?): CovidScreen =
